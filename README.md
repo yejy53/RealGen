@@ -5,4 +5,4 @@
 ## 📰 News
 * **[2025.12.02]**  🔥 We have released **RealGen: Photorealistic Text-to-Image Generation via Detector-Guided Rewards**. Check out the **[** [Paper](https://arxiv.org/abs/2512.00473);  **]**. 
 
-![fig1](figures/fig-1-case.pdf)
+![fig1](figures/fig1.png)
