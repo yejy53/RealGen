@@ -19,9 +19,9 @@ export default function Comparison() {
                     viewport={{ once: true }}
                     className="space-y-4 text-center"
                 >
-                    <p className="text-muted-foreground mb-8">
+                    {/* <p className="text-muted-foreground mb-8">
                         Qualitative comparison of different methods on RealBench.
-                    </p>
+                    </p> */}
 
                     <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-secondary/5">
                         <Image
