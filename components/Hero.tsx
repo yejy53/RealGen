@@ -120,8 +120,8 @@ export default function Hero() {
                         ))}
                     </div>
 
-                    {/* Affiliations */}
-                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm md:text-base text-muted-foreground/80 font-mono max-w-4xl mx-auto">
+                    {/* Affiliations - Constrained width to force 2 lines */}
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm md:text-base text-muted-foreground/80 font-mono max-w-[680px] mx-auto">
                         {affiliations.map((aff, index) => (
                             <div key={index} className="flex items-center gap-1">
                                 <span className="text-primary/60">{index + 1}</span>

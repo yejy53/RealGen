@@ -16,6 +16,7 @@ export default function Gallery() {
         <section className="py-24 bg-secondary/5">
             <div className="container mx-auto px-4">
                 <div className="flex items-center gap-4 mb-16">
+                    <div className="h-px bg-border flex-1" />
                     <h2 className="text-3xl font-bold tracking-tight uppercase text-foreground">Gallery</h2>
                     <div className="h-px bg-border flex-1" />
                 </div>

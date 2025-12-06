@@ -11,8 +11,8 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Hero />
       <Abstract />
-      <Gallery />
       <Comparison />
+      <Gallery />
       <Citation />
     </main>
   );
