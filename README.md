@@ -48,8 +48,8 @@ conda activate reward_server
 pip install -e .
 ```
 We trained task-specific detectors to serve as reward model based on an existing fake detection models:
-- Semantic Detector: Forensic-Chat, a generalizable and interpretable detector optimized from Qwen2.5-VL-7B. It assesses authenticity by analyzing image content (e.g., smooth greasy skin, artifacts in faces/hands, unnatural background blur). 
-- Feature Detector: OmniAID achieves stable and accurate detection by being pre-trained on large-scale real and synthetic datasets. Feature-level artifacts are primarily associated with frequency artifacts and abnormal noise patterns. 
+- **Semantic Detector**: Forensic-Chat, a generalizable and interpretable detector optimized from Qwen2.5-VL-7B. It assesses authenticity by analyzing image content (e.g., smooth greasy skin, artifacts in faces/hands, unnatural background blur). 
+- **Feature Detector**: OmniAID achieves stable and accurate detection by being pre-trained on large-scale real and synthetic datasets. Feature-level artifacts are primarily associated with frequency artifacts and abnormal noise patterns. 
 An 8-GPU H200 training node was employed for this study, with seven GPUs allocated for the GRPO training process and one GPU reserved for hosting the reward server. Reference code for running the service:
 ```bash
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18085 "app_qwenfake:create_app()" > reward_qwenfake.log 2>&1 &
@@ -63,6 +63,7 @@ conda activate flow-grpo
 bash scripts/single_node/fast_grpo_flux_guard.sh
 ```
 Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in `/RealGen/flow_grpo/flow_grpo/rewards.py`. You may also refer to Flow GRPO.
+
 The dataset is located in /RealGen/flow_grpo/dataset/realgen. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
 ### 5. Evaluation
 The inference and evaluation processes are realized according to the code in /RealGen/eval.
