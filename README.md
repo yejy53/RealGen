@@ -40,7 +40,7 @@ Please download the required models in advance.
   - Detection Model: Forensic-chat, OmniAID or other Fake detection models
   - Alignment Model: Longclip or clip
 ### 3. Reward Preparation
-The steps above strictly cover the installation of the core repository. Given that different reward models often depend on conflicting library versions, merging them into a single Conda environment can lead to compatibility issues. To mitigate this, please create a new Conda virtual environment and install the corresponding dependencies according to the instructions in https://github.com/yifan123/reward-server
+The steps above strictly cover the installation of the core repository. Given that different reward models often depend on conflicting library versions, merging them into a single Conda environment can lead to compatibility issues. To mitigate this, please create a new Conda virtual environment and install the corresponding dependencies according to the instructions in [Reward Server](https://github.com/yifan123/reward-server)
 ```bash
 cd /RealGen/flow_grpo/reward-server
 conda create -n reward_server python=3.10.16
@@ -56,13 +56,13 @@ CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18085 "app_qw
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18087 "app_effortmoe:create_app()" > reward_effort.log 2>&1 &
 ```
 ### 4. Start Training GRPO
-Model parameter settings are located in /RealGen/flow_grpo/config, while the main files and training settings are in /RealGen/flow_grpo/scripts. Notably, we have also updated GRPO-Guard https://jingw193.github.io/GRPO-Guard/ to improve the capability of generating high-quality images. Below is a reference for running a selected model:
+Model parameter settings are located in `/RealGen/flow_grpo/config`, while the main files and training settings are in `/RealGen/flow_grpo/scripts`. Notably, we have also updated **[GRPO-Guard](https://jingw193.github.io/GRPO-Guard/)** to improve the capability of generating high-quality images. Below is a reference for running a selected model:
 ```bash
 cd /RealGen/flow_grpo
 conda activate flow-grpo
 bash scripts/single_node/fast_grpo_flux_guard.sh
 ```
-Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in /RealGen/flow_grpo/flow_grpo/rewards.py. You may also refer to Flow GRPO https://github.com/yifan123/flow_grpo.
+Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in `/RealGen/flow_grpo/flow_grpo/rewards.py`. You may also refer to Flow GRPO.
 The dataset is located in /RealGen/flow_grpo/dataset/realgen. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
 ### 5. Evaluation
 The inference and evaluation processes are realized according to the code in /RealGen/eval.
