@@ -74,7 +74,7 @@ The inference and evaluation processes are realized according to the code in /Re
 ```bib
 @article{ye2025realgen,
   title={RealGen: Photorealistic Text-to-Image Generation via Detector-Guided Rewards},
-  author={Ye, Junyan and Zhu, Leiqi and Guo, Yuncheng and Jiang, Dongzhi and Huang, Zilong and Zhang, Yifan and Yan, Zhiyuan and Fu, Haohuan and He, Conghui and Li, Weijia},
+  author={Ye, Junyan and Zhu, Leqi and Guo, Yuncheng and Jiang, Dongzhi and Huang, Zilong and Zhang, Yifan and Yan, Zhiyuan and Fu, Haohuan and He, Conghui and Li, Weijia},
   journal={arXiv preprint arXiv:2512.00473},
   year={2025}
 }
