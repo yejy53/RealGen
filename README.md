@@ -40,7 +40,7 @@ Please download the required models in advance.
   - SD: stabilityai/stable-diffusion-3.5-large
   - Other diffusion models
 - Reward Models：
-  - Detection Model: Forensic-chat, OmniAID or other Fake detection models
+  - Detection Model: [Forensic-chat and OmniAID](https://huggingface.co/lokiz666/Realgen-detection-models) or other Fake detection models  
   - Alignment Model: Longclip, clip or other alignment models
 ### 3. Reward Preparation
 The steps above strictly cover the installation of the core repository. Given that different reward models often depend on conflicting library versions, merging them into a single Conda environment can lead to compatibility issues. To mitigate this, please create a new Conda virtual environment and install the corresponding dependencies according to the instructions in [Reward Server](https://github.com/yifan123/reward-server)
