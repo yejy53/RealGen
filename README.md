@@ -64,7 +64,7 @@ bash scripts/single_node/fast_grpo_flux_guard.sh
 ```
 Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in `/RealGen/flow_grpo/flow_grpo/rewards.py`. You may also refer to Flow GRPO.
 
-The dataset is located in /RealGen/flow_grpo/dataset/realgen. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
+The dataset is located in `/RealGen/flow_grpo/dataset/realgen`. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
 ### 5. Evaluation
 The inference and evaluation processes are realized according to the code in /RealGen/eval.
 
