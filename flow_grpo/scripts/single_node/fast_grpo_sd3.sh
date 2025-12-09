@@ -1,0 +1,2 @@
+#!/bin/bash
+accelerate launch --config_file scripts/accelerate_configs/deepspeed_zero2.yaml --num_processes=7 --main_process_port 29501 scripts/train_sd3_fast_fusion.py --config config/grpo.py:sd3_fast

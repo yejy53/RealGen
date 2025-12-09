@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: flow-grpo
+Version: 0.0.1
+Requires-Python: >=3.10
+Provides-Extra: dev
+License-File: LICENSE
