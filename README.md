@@ -25,12 +25,12 @@
 - It should be stated that our proposed detection-for-generation framework is compatible with all diffusion-model-based GRPO paradigms, such Dance GRPO and Flow GRPO. And our implementation is primarily based on **[Flow GRPO](https://github.com/yifan123/flow_grpo)**
 ### 1. Environment Set Up
 Diffusion model Training Framework Based on Flow GRPO：Environment Configuration Reference **[Flow GRPO](https://github.com/yifan123/flow_grpo)**
-'''bash
+```bash
 cd /RealGen/flow_grpo
 conda create -n flow_grpo python=3.10.16
 pip install -e .
-'''
-2. Model Download
+```
+### 2. Model Download
 Please download the required models in advance.
 - T2I Models：
   - FLux: black-forest-labs/FLUX.1-dev
@@ -39,25 +39,32 @@ Please download the required models in advance.
 - Reward Models：
   - Detection Model: Forensic-chat, OmniAID or other Fake detection models
   - Alignment Model: Longclip or clip
-3. Reward Preparation
+### 3. Reward Preparation
 The steps above strictly cover the installation of the core repository. Given that different reward models often depend on conflicting library versions, merging them into a single Conda environment can lead to compatibility issues. To mitigate this, please create a new Conda virtual environment and install the corresponding dependencies according to the instructions in https://github.com/yifan123/reward-server
+```bash
 cd /RealGen/flow_grpo/reward-server
 conda create -n reward_server python=3.10.16
 conda activate reward_server
 pip install -e .
+```
 We trained task-specific detectors to serve as reward model based on an existing fake detection models:
 - Semantic Detector: Forensic-Chat, a generalizable and interpretable detector optimized from Qwen2.5-VL-7B. It assesses authenticity by analyzing image content (e.g., smooth greasy skin, artifacts in faces/hands, unnatural background blur). 
 - Feature Detector: OmniAID achieves stable and accurate detection by being pre-trained on large-scale real and synthetic datasets. Feature-level artifacts are primarily associated with frequency artifacts and abnormal noise patterns. 
 An 8-GPU H200 training node was employed for this study, with seven GPUs allocated for the GRPO training process and one GPU reserved for hosting the reward server. Reference code for running the service:
+```bash
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18085 "app_qwenfake:create_app()" > reward_qwenfake.log 2>&1 &
-4. Start Training GRPO
+CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18087 "app_effortmoe:create_app()" > reward_effort.log 2>&1 &
+```
+### 4. Start Training GRPO
 Model parameter settings are located in /RealGen/flow_grpo/config, while the main files and training settings are in /RealGen/flow_grpo/scripts. Notably, we have also updated GRPO-Guard https://jingw193.github.io/GRPO-Guard/ to improve the capability of generating high-quality images. Below is a reference for running a selected model:
+```bash
 cd /RealGen/flow_grpo
 conda activate flow-grpo
-nohup bash scripts/single_node/fast_grpo_flux_guard.sh > training.log 2>&1 &
+bash scripts/single_node/fast_grpo_flux_guard.sh
+```
 Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in /RealGen/flow_grpo/flow_grpo/rewards.py. You may also refer to Flow GRPO https://github.com/yifan123/flow_grpo.
 The dataset is located in /RealGen/flow_grpo/dataset/realgen. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
-5. Evaluation
+### 5. Evaluation
 The inference and evaluation processes are realized according to the code in /RealGen/eval.
 
 ## 📕 BibTeX 
