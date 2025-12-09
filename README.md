@@ -25,7 +25,7 @@
 This repo is based on [Flow GRPO](https://github.com/yifan123/flow_grpo). We thank the authors for their valuable contributions to the AlGC community.
 
 ## 🚀 Quick Started
-- It should be stated that our proposed detection-for-generation framework is compatible with all diffusion-model-based GRPO paradigms, such Dance GRPO and Flow GRPO. And our implementation is primarily based on **[Flow GRPO](https://github.com/yifan123/flow_grpo)**
+- It should be stated that our proposed detection-for-generation framework is compatible with all diffusion-model-based GRPO paradigms, such Dance GRPO and Flow GRPO. 
 ### 1. Environment Set Up
 Diffusion model Training Framework Based on Flow GRPO：Environment Configuration Reference [Flow GRPO](https://github.com/yifan123/flow_grpo)
 ```bash
