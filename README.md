@@ -63,7 +63,7 @@ CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18087 "app_ef
 Model parameter settings are located in `/RealGen/flow_grpo/config`, while the main files and training settings are in `/RealGen/flow_grpo/scripts`. Notably, we have also updated **[GRPO-Guard](https://jingw193.github.io/GRPO-Guard/)** to improve the capability of generating high-quality images. Below is a reference for running a selected model:
 ```bash
 cd /RealGen/flow_grpo
-conda activate flow-grpo
+conda activate flow_grpo
 bash scripts/single_node/fast_grpo_flux_guard.sh
 ```
 Additionally, if there are no environmental conflicts and GPU memory is sufficient, the reward function does not need to be deployed as a separate service. It can be modified directly in `/RealGen/flow_grpo/flow_grpo/rewards.py`. You may also refer to Flow GRPO.
