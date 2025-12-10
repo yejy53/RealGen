@@ -60,7 +60,7 @@ CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18085 "app_qw
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18087 "app_effortmoe:create_app()" > reward_effort.log 2>&1 &
 ```
 ### 4. Start Training GRPO
-Model parameter settings are located in `/RealGen/flow_grpo/config`, while the main files and training settings are in `/RealGen/flow_grpo/scripts`. Notably, we have also updated **[GRPO-Guard](https://jingw193.github.io/GRPO-Guard/)** to improve the capability of generating high-quality images. Below is a reference for running a selected model:
+Model parameter settings are located in `/RealGen/flow_grpo/config`, while the main files and training settings are in `/RealGen/flow_grpo/scripts`. Notably, we have also updated [GRPO-Guard](https://jingw193.github.io/GRPO-Guard/) to improve the capability of generating high-quality images. Below is a reference for running a selected model:
 ```bash
 cd /RealGen/flow_grpo
 conda activate flow_grpo
