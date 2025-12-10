@@ -70,7 +70,7 @@ Additionally, if there are no environmental conflicts and GPU memory is sufficie
 
 The dataset is located in `/RealGen/flow_grpo/dataset/realgen`. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
 ### 5. Evaluation
-The inference and evaluation processes are realized according to the code in /RealGen/eval.
+The inference and evaluation processes are realized according to the code in `/RealGen/eval`.
 
 ## 📕 BibTeX 
 
