@@ -50,7 +50,7 @@ conda create -n reward_server python=3.10.16
 conda activate reward_server
 pip install -e .
 ```
-We trained task-specific detectors to serve as reward model based on an existing fake detection models. To clarify, we found that reward hacking occurs easily during GRPO training. The detection model tends to give high scores to noisy or blurry images. For this reason, we retrained OmniAID to make it suitable for our task:
+We trained task-specific detectors to serve as reward model based on an existing fake detection models. To clarify, we found that reward hacking occurs easily during GRPO training. The existing detection models tends to give high scores to noisy or blurry images. For this reason, we retrained OmniAID to make it suitable for our task:
 - **Semantic Detector**: Forensic-Chat, a generalizable and interpretable detector optimized from Qwen2.5-VL-7B. It assesses authenticity by analyzing image content (e.g., smooth greasy skin, artifacts in faces/hands, unnatural background blur). 
 - **Feature Detector**: OmniAID achieves stable and accurate detection by being pre-trained on large-scale real and synthetic datasets. Feature-level artifacts are primarily associated with frequency artifacts and abnormal noise patterns. Original model and parameter reference [OmniAID](https://github.com/yunncheng/OmniAID).
 
