@@ -191,8 +191,8 @@ def pickscore_score(device):
 
 def multi_score(device, score_dict):
     score_functions = {
-        "qwenvlfake": qwen_fake_score,
-        "effort": effort_score,
+        "forensic_chat": qwen_fake_score,
+        "omniaid": effort_score,
         "hpsv2": hpsv2_score,
         "hpsv3": hpsv3_score,
         "clipscore": clip_score,

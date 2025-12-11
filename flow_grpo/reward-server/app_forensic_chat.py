@@ -2,7 +2,7 @@ from PIL import Image
 from io import BytesIO
 import pickle
 import traceback
-from reward_server.qwenfake_scorer import QwenVLScorer
+from reward_server.forensic_chat_scorer import QwenVLScorer
 import os
 import torch
 

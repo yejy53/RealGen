@@ -60,8 +60,8 @@ def sd3_fast():
     config.eval_freq = 10
     config.save_dir = 'logs/flow-grpo/sd'
     config.reward_fn = {
-        "qwenvlfake": 1.0,
-        "effort": 1.0,
+        "forensic_chat": 1.0,
+        "omniaid": 1.0,
         "longclip": 1.0,
     }
     
@@ -103,8 +103,8 @@ def flux_fast():
     config.eval_freq = 10
     config.save_dir = 'logs/flow-grpo/flux'
     config.reward_fn = {
-        "qwenvlfake": 1.0,
-        "effort": 1.0,
+        "forensic_chat": 1.0,
+        "omniaid": 1.0,
         "longclip": 1.0,
         # "hpsv2": 1.0,
         # "hpsv3": 1.0,
@@ -153,8 +153,8 @@ def flux_fast_guard():
     config.eval_freq = 10
     config.save_dir = 'logs/grpo-guard/flux-fast-guard'
     config.reward_fn = {
-        "qwenvlfake": 1.0,
-        "effort": 1.0,
+        "forensic_chat": 1.0,
+        "omniaid": 1.0,
         "longclip": 1.0,
     }
     

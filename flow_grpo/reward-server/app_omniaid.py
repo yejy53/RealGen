@@ -2,7 +2,7 @@ from PIL import Image
 from io import BytesIO
 import pickle
 import traceback
-from reward_server.effort_scorer import EffortScorer
+from reward_server.omniaid_scorer import OmniAIDScorer
 import os
 import torch
 
@@ -22,9 +22,8 @@ def inference():
     global INFERENCE_FN
     if INFERENCE_FN is None:
         print(f"Worker (PID: {os.getpid()}) is loading the model...")
-        INFERENCE_FN = EffortScorer(
-            device="cuda",
-            dtype=torch.bfloat16
+        INFERENCE_FN = OmniAIDScorer(
+            device="cuda"
         )
         print(f"Worker (PID: {os.getpid()}) model loaded.")
 
