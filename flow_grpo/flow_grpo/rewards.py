@@ -9,7 +9,7 @@ from requests.adapters import HTTPAdapter, Retry
 from io import BytesIO
 import pickle
 
-def qwen_fake_score(device):
+def forensic_chat_score(device):
 
     url = "http://127.0.0.1:18085"
     sess = requests.Session()
@@ -30,7 +30,7 @@ def qwen_fake_score(device):
 
     return _fn
 
-def effort_score(device):
+def omniaid_score(device):
 
     url = "http://127.0.0.1:18087"
     sess = requests.Session()
@@ -191,8 +191,8 @@ def pickscore_score(device):
 
 def multi_score(device, score_dict):
     score_functions = {
-        "forensic_chat": qwen_fake_score,
-        "omniaid": effort_score,
+        "forensic_chat": forensic_chat_score,
+        "omniaid": omniaid_score,
         "hpsv2": hpsv2_score,
         "hpsv3": hpsv3_score,
         "clipscore": clip_score,
@@ -209,7 +209,7 @@ def multi_score(device, score_dict):
         score_details = {}
         
         for score_name, weight in score_dict.items():
-            if score_name == forensic_chat":
+            if score_name == "forensic_chat":
                 scores, rewards = score_fns[score_name](images)
             elif score_name == "omniaid":
                 scores, rewards = score_fns[score_name](images)
