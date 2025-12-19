@@ -31,8 +31,6 @@ It is exciting to see the community converging on this effective paradigm to bri
 
 ![fig1](figures/fig7.png)
 
-## 🤗 Acknowledgement
-This repo is based on [Flow GRPO](https://github.com/yifan123/flow_grpo). We thank the authors for their valuable contributions to the AlGC community.
 
 ## 🚀 Quick Started
 - It should be stated that our proposed detection-for-generation framework is compatible with all diffusion-model-based GRPO paradigms, such Dance GRPO and Flow GRPO. 
@@ -81,6 +79,9 @@ Additionally, if there are no environmental conflicts and GPU memory is sufficie
 The dataset is located in `/RealGen/flow_grpo/dataset/realgen`. The training set contains short prompts and their rewritten long captions covering multiple topics, such as people, animals, and architecture.
 ### 5. Evaluation
 The inference and evaluation processes are realized according to the code in `/RealGen/eval`.
+
+## 🤗 Acknowledgement
+This repo is based on [Flow GRPO](https://github.com/yifan123/flow_grpo). We thank the authors for their valuable contributions to the AlGC community.
 
 ## 📕 BibTeX 
 
