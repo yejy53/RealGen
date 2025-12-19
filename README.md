@@ -66,6 +66,7 @@ An 8-GPU H200 training node was employed for this study, with seven GPUs allocat
 ```bash
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18085 "app_forensic_chat:create_app()" > reward_forensic_chat.log 2>&1 &
 CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18087 "app_omniaid:create_app()" > reward_omniaid.log 2>&1 &
+CUDA_VISIBLE_DEVICES=7 nohup gunicorn --workers 1 --bind 127.0.0.1:18089 "app_longclip:create_app()" > reward_longclip.log 2>&1 &
 ```
 ### 4. Start Training GRPO
 Model parameter settings are located in `/RealGen/flow_grpo/config`, while the main files and training settings are in `/RealGen/flow_grpo/scripts`. Notably, we have also updated [GRPO-Guard](https://jingw193.github.io/GRPO-Guard/) to improve the capability of generating high-quality images. Below is a reference for running a selected model:
