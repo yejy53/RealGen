@@ -209,9 +209,9 @@ def multi_score(device, score_dict):
         score_details = {}
         
         for score_name, weight in score_dict.items():
-            if score_name == "qwenvlfake":
+            if score_name == forensic_chat":
                 scores, rewards = score_fns[score_name](images)
-            elif score_name == "effort":
+            elif score_name == "omniaid":
                 scores, rewards = score_fns[score_name](images)
             elif score_name == "hpsv2":
                 scores, rewards = score_fns[score_name](images, prompts)
