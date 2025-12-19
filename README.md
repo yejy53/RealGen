@@ -1,6 +1,8 @@
 # RealGen: Photorealistic Text-to-Image Generation via Detector-Guided Rewards
-<a href="https://arxiv.org/abs/2512.00473" target="_blank"><img src="https://img.shields.io/badge/arXiv-arXiv-red?style=badge&logo=arXiv" alt="Paper PDF" height="25"></a>
-
+<p align="center">
+  <a href="https://arxiv.org/abs/2512.00473" target="_blank"><img src="https://img.shields.io/badge/arXiv-arXiv-red?style=badge&logo=arXiv" alt="Paper PDF" height="25"></a>
+  <a href='https://yejy53.github.io/RealGen/'><img src='https://img.shields.io/badge/Project_Page-RealGen-green''https://img.shields</a>
+</p>
 
 ## 📰 News
 * **[2025.12.02]**  🔥 We have released **RealGen: Photorealistic Text-to-Image Generation via Detector-Guided Rewards**. Check out the **[** [Paper](https://arxiv.org/abs/2512.00473);  **]**. 
@@ -16,6 +18,14 @@
 
 <img src="figures/RealGEN-Comparison.jpg" width="600" alt="fig2">
 
+## 🤝 Concurrent Work
+
+We are pleased to find that the strategy of utilizing **AIGC detectors as reward signals** has been independently explored by other excellent concurrent works. We acknowledge and recommend checking out:
+
+* **[LongCat-Image](https://github.com/meituan-longcat/LongCat-Image/)**: They innovatively incorporate an AIGC detection model as a reward during the RL phase, utilizing adversarial signals to guide the model toward generating images with the **texture and fidelity of the real physical world**.
+* **[Z-Image](https://github.com/Tongyi-MAI/Z-Image)**: In their RLHF pipeline, they design a comprehensive reward model where **AI-Content Detection perception** serves as a critical dimension, alongside instruction-following capability and aesthetic quality.
+
+It is exciting to see the community converging on this effective paradigm to bridge the gap between generated and real distributions.
 
 ## ✨ Comparison
 
