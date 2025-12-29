@@ -14,7 +14,7 @@ from accelerate.logging import get_logger
 from diffusers import FluxPipeline
 from diffusers.utils.torch_utils import is_compiled_module
 import numpy as np
-# import flow_grpo.prompts
+import flow_grpo.prompts
 import flow_grpo.rewards
 from flow_grpo.stat_tracking import PerPromptStatTracker
 from flow_grpo.diffusers_patch.flux_pipeline_with_logprob_fast import pipeline_with_logprob
@@ -181,8 +181,9 @@ def compute_log_prob(transformer, pipeline, sample, j, config):
             noise_level=config.sample.noise_level,
             return_sqrt_dt=config.rationorm
         )
-        
-        return prev_sample, log_prob, prev_sample_mean, std_dev_t, sqrt_dt
+        # 新增
+        v_pred = model_pred.float()
+        return prev_sample, log_prob, prev_sample_mean, std_dev_t, sqrt_dt, v_pred
 
     else:
         prev_sample, log_prob, prev_sample_mean, std_dev_t= sde_step_with_logprob(
@@ -193,8 +194,8 @@ def compute_log_prob(transformer, pipeline, sample, j, config):
             prev_sample=sample["next_latents"][:, j].float(),
             noise_level=config.sample.noise_level,
         )
-
-        return prev_sample, log_prob, prev_sample_mean, std_dev_t
+        v_pred = model_pred.float()
+        return prev_sample, log_prob, prev_sample_mean, std_dev_t, v_pred
 
 def multisocre_countforwandb(reward_type, rewards_dict):
     reward_parts = [f"{key}: {value:.2f}" for key, value in zip(reward_type, rewards_dict)]
@@ -826,17 +827,18 @@ def main(_):
                 ):
                     with accelerator.accumulate(transformer):
                         with autocast():
+                            # 这里修改了
                             if config.rationorm:
-                                prev_sample, log_prob, prev_sample_mean, std_dev_t, sqrt_dt = compute_log_prob(transformer, pipeline, sample, j, config)
+                                prev_sample, log_prob, prev_sample_mean, std_dev_t, sqrt_dt, v_pred = compute_log_prob(transformer, pipeline, sample, j, config)
                             else:
-                                prev_sample, log_prob, prev_sample_mean, std_dev_t = compute_log_prob(transformer, pipeline, sample, j, config)
-                            if config.train.beta > 0:
+                                prev_sample, log_prob, prev_sample_mean, std_dev_t, v_pred = compute_log_prob(transformer, pipeline, sample, j, config)
+                            if config.train.vkl and config.train.beta > 0:
                                 with torch.no_grad():
                                     with transformer.module.disable_adapter():
                                         if config.rationorm:
-                                            _, _, prev_sample_mean_ref, _, _ = compute_log_prob(transformer, pipeline, sample, j, config)
+                                            _, _, prev_sample_mean_ref, _, _, v_pred_ref = compute_log_prob(transformer, pipeline, sample, j, config)
                                         else:
-                                            _, _, prev_sample_mean_ref, _ = compute_log_prob(transformer, pipeline, sample, j, config)
+                                            _, _, prev_sample_mean_ref, _, v_pred_ref = compute_log_prob(transformer, pipeline, sample, j, config)
 
                         # grpo logic
                         advantages = torch.clamp(
@@ -853,7 +855,8 @@ def main(_):
                         else:
                             ratio = torch.exp(log_prob - sample["log_probs"][:, j])
 
-                        ratio = torch.exp(log_prob - sample["log_probs"][:, j])
+                        # 这个看起来不太对！
+                        # ratio = torch.exp(log_prob - sample["log_probs"][:, j])
                         unclipped_loss = -advantages * ratio
                         clipped_loss = -advantages * torch.clamp(
                             ratio,
@@ -864,10 +867,18 @@ def main(_):
 
                         if config.rationorm:
                             policy_loss = policy_loss / (sqrt_dt.mean()**2)
-                            
-                        if config.train.beta > 0:
-                            kl_loss = ((prev_sample_mean - prev_sample_mean_ref) ** 2).mean(dim=(1,2), keepdim=True) / (2 * std_dev_t ** 2)
-                            kl_loss = torch.mean(kl_loss)
+                        
+                        # 原来的版本
+                        # if config.train.beta > 0:
+                        #     kl_loss = ((prev_sample_mean - prev_sample_mean_ref) ** 2).mean(dim=(1,2), keepdim=True) / (2 * std_dev_t ** 2)
+                        #     kl_loss = torch.mean(kl_loss)
+                        #     loss = policy_loss + config.train.beta * kl_loss
+                        # else:
+                        #     loss = policy_loss
+
+                        # 计算 policy_loss 后，新版本
+                        if config.train.vkl and config.train.beta > 0:
+                            kl_loss = ((v_pred - v_pred_ref) ** 2).mean()
                             loss = policy_loss + config.train.beta * kl_loss
                         else:
                             loss = policy_loss
