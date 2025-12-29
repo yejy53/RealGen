@@ -122,12 +122,14 @@ def flux_fast_guard():
     config = compressibility()
     config.dataset = os.path.join(os.getcwd(), "dataset/realgen")
 
-    # sd3.5 medium
+    # flux1.dev
     config.pretrained.model = "../RealGen/models/flux1-dev"
     config.sample.num_steps = 28
     config.sample.train_num_steps = 7
     config.sample.eval_num_steps = 28
     config.sample.guidance_scale = 3.5
+    config.sample.sde_window_size = 9
+    config.sample.sde_window_range = (0, config.sample.num_steps//2)
 
     config.resolution = 1024
     # 这里固定为1
@@ -141,11 +143,20 @@ def flux_fast_guard():
     config.train.gradient_accumulation_steps = config.sample.num_batches_per_epoch//2
     config.train.num_inner_epochs = 1
     config.train.timestep_fraction = 0.99
-    config.train.beta = 0.01
-    config.train.clip_range=1e-5
+    # 修改
+    # config.train.beta = 0.01
+    # config.train.clip_range=1e-5
+    config.train.beta = 4e-4
+    config.train.clip_range = 2e-6
+    config.train.vkl = True
     config.train.learning_rate = 1e-4
     config.rationorm = True
-    config.sample.global_std = True
+    # 修改
+    # config.sample.global_std = True
+    config.sample.global_std = False
+    config.train.cfg = False
+
+
     config.sample.noise_level = 0.9
     config.train.ema = True
     config.mixed_precision = "bf16"
