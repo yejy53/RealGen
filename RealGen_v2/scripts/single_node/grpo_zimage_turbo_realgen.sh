@@ -1,0 +1,2 @@
+#!/bin/bash
+accelerate launch --config_file scripts/accelerate_configs/deepspeed_zero2.yaml --num_processes=8 --main_process_port 29501 scripts/train_zimage_fast_guard_realgen.py --config config/realgen.py:zimage_turbo_fast_guard
